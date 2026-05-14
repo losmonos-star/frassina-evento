@@ -10,7 +10,7 @@
 :root{--bg:#0c1a0e;--ink:#f5ede0;--ink2:#c8b89a;--accent:#e8401a;--accent2:#f0a030;--card:rgba(10,24,12,0.82);--border:rgba(200,184,154,0.18);--r:14px;--fd:'Fraunces',Georgia,serif;--fb:'Lexend',sans-serif}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:18px;scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--fb);font-weight:300;line-height:1.8;letter-spacing:.02em;min-height:100vh}
+body{background:var(--bg);color:var(--ink);font-family:var(--fb);font-weight:300;line-height:1.8;letter-spacing:.02em;min-height:100vh;overflow-x:hidden}
 body.large-text{font-size:22px;line-height:2.1}
 body.hi-contrast{--card:rgba(0,0,0,0.95);--ink:#ffffff;--ink2:#ffff00;--accent:#ff6040;--border:rgba(255,255,255,0.5)}
 body.light-mode{--bg:#f0ebe0;--ink:#1a120a;--ink2:#4a3820;--card:rgba(245,238,224,0.92);--border:rgba(80,50,20,0.18)}
@@ -18,7 +18,7 @@ body.colorblind{--accent:#d4a800;--accent2:#00a878}
 .skip{position:absolute;top:-100px;left:1rem;background:var(--accent);color:#fff;padding:.6rem 1.2rem;border-radius:999px;font-size:.85rem;z-index:9999;transition:top .2s;text-decoration:none}
 .skip:focus{top:1rem}
 :focus-visible{outline:2px solid var(--accent2);outline-offset:3px}
-.a11y-bar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,20,12,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:.3rem .5rem;display:flex;gap:.3rem;align-items:center;flex-wrap:nowrap}
+.a11y-bar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,20,12,0.92);backdrop-filter:blur(8px);padding:.3rem .5rem;display:flex;gap:.3rem;align-items:center;flex-wrap:nowrap}
 body.light-mode .a11y-bar{background:rgba(240,235,224,0.95)}
 .ab{background:transparent;border:1px solid var(--border);color:var(--ink2);padding:.18rem .45rem;border-radius:999px;font-size:.62rem;cursor:pointer;transition:all .15s;font-family:var(--fb);white-space:nowrap;flex-shrink:0}
 .ab:hover,.ab.on{background:var(--accent);color:#fff;border-color:var(--accent)}
@@ -30,7 +30,7 @@ body.light-mode .a11y-bar{background:rgba(240,235,224,0.95)}
 .hero-text{position:absolute;bottom:14rem;left:0;right:0;padding:0 1.5rem}.hero-cta{position:absolute;bottom:1.5rem;left:0;right:0;padding:0 1.5rem;display:flex;gap:.75rem;flex-wrap:wrap}
 .collab-line{font-size:.78rem;text-transform:uppercase;letter-spacing:.16em;color:#fff;font-weight:600;text-shadow:0 1px 6px rgba(0,0,0,0.9);margin-bottom:.5rem}
 .hero-title{font-family:var(--fd);font-size:clamp(2rem,6vw,3.5rem);font-weight:700;line-height:1.05;color:var(--ink);margin-bottom:.4rem}
-.hero-title span{color:var(--accent)}
+.hero-title span{color:var(--accent);-webkit-text-stroke:0.4px #000;text-stroke:0.4px #000}
 .hero-place{font-size:.85rem;color:var(--ink2);margin-bottom:.9rem;letter-spacing:.04em}
 .hero-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.4rem}
 .tag{background:rgba(58,110,48,0.35);border:1px solid rgba(58,110,48,0.6);color:#8fd878;font-size:.68rem;padding:.2rem .6rem;border-radius:999px;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
@@ -50,8 +50,22 @@ body.light-mode .a11y-bar{background:rgba(240,235,224,0.95)}
 .format-body p{margin-bottom:.9rem}
 .format-body p:last-child{margin-bottom:0}
 .menu-sequence{display:flex;flex-direction:column}
-.menu-item{display:grid;grid-template-columns:2rem 1fr;gap:.6rem 1rem;padding:1rem 0;border-bottom:1px solid var(--border);align-items:start}
+.menu-item{display:grid;grid-template-columns:2rem 1fr;gap:.6rem 1rem;padding:1rem 0;align-items:start}
 .menu-item:last-child{border-bottom:none}
+.seq-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;width:100%}
+.seq-head{font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink2);padding-bottom:.5rem;opacity:.6}
+.seq-drink{display:flex;gap:.6rem;align-items:start;padding:.8rem 0;grid-column:1}
+.seq-food{padding:.8rem 0 .8rem .8rem;grid-column:2}
+.seq-food-span{grid-row:span 2}
+.seq-num{font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--accent);line-height:1.3;min-width:1.4rem;text-align:right;flex-shrink:0}
+.menu-row{display:grid;grid-template-columns:1fr 1fr;gap:0}
+
+.menu-col{padding:1rem .5rem 1rem 0}
+.menu-col+.menu-col{padding-left:1rem}
+.food-title{font-size:.82rem;color:var(--ink);line-height:1.5;font-weight:500}.food-ingredients{font-size:.78rem;color:var(--ink2);line-height:1.5;margin-top:.15rem}.food-block{margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--border)}
+.food-allergen{font-size:.65rem;color:var(--ink2);margin-top:.4rem}
+.food-span{grid-row:span 2}
+.empty-col{opacity:0}
 .menu-num{font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--accent);line-height:1.3;text-align:right}
 .menu-name{font-size:.95rem;font-weight:500;color:var(--ink);margin-bottom:.2rem}
 .menu-desc{font-size:.78rem;color:var(--ink2);line-height:1.5}
@@ -97,7 +111,7 @@ footer{text-align:center;padding:2rem 1.5rem 3rem;border-top:1px solid var(--bor
   <div class="hero-text">
     <p class="collab-line">Los Monos Sociales × Il Paradiso di Frassina</p>
     <h1 class="hero-title" id="hero-title">Evento<br>tra i <span>filari</span>.</h1>
-    <p class="hero-place">Montalcino, Val d’Orcia — Giugno 2025</p>
+    <p class="hero-place">Montalcino, Val d’Orcia — 20 Giugno 2026</p>
     <div class="hero-tags" role="list">
       <span class="tag" role="listitem" aria-label="icona foglie">🌱 Vegan</span>
       <span class="tag" role="listitem" aria-label="icona grano">🌾 Gluten free</span>
@@ -115,31 +129,72 @@ footer{text-align:center;padding:2rem 1.5rem 3rem;border-top:1px solid var(--bor
     <p class="section-label">Come funziona</p>
     <div class="format-body">
       <p>Passeggiata tra i filari e introduzione alla vigna, degustazione guidata di 4 cocktail che raccontano il territorio del Paradiso e la storia di questa collaborazione, tutto accompagnato da tapas e musica.</p>
-      <p>L’evento si terrà a Giugno. Posti limitati con prenotazione obbligatoria.</p>
+      <p>L’evento si terrà il 20 Giugno. Posti limitati con prenotazione obbligatoria.</p>
     </div>
   </section>
 
   <section class="section" id="menu" aria-labelledby="menu-title">
-    <p class="section-label">Sequenza</p>
+    <p class="section-label">Sequenza e abbinamenti</p>
     <div class="menu-sequence" role="list">
-      <article class="menu-item" role="listitem">
-        <div class="menu-num" aria-hidden="true">1</div>
-        <div><div class="menu-name">Sake Nigori</div><div class="menu-desc">Kefir · acacia · rosa canina · melissa</div><div class="allergen"><span class="a-tag" role="img" aria-label="Allergene: solfiti">⚠ solfiti</span><span class="a-tag" role="img" aria-label="Allergene: latticini">⚠ latticini</span></div></div>
-      </article>
-      <article class="menu-item" role="listitem">
-        <div class="menu-num" aria-hidden="true">2</div>
-        <div><div class="menu-name">Sour DO</div><div class="menu-desc">Cognac · verjus · sciroppo di rosa</div><div class="allergen"><span class="a-tag" role="img" aria-label="Allergene: solfiti">⚠ solfiti</span></div></div>
-      </article>
-      <article class="menu-item" role="listitem">
-        <div class="menu-num" aria-hidden="true">3</div>
-        <div><div class="menu-name">Papa Doble</div><div class="menu-desc">Fat washed cocco/fico · maraschino · shrub di borraggine</div><div class="allergen"><span class="a-tag" role="img" aria-label="Allergene: frutta a guscio">⚠ frutta a guscio</span></div></div>
-      </article>
-      <article class="menu-item" role="listitem">
-        <div class="menu-num" aria-hidden="true">4</div>
-        <div><div class="menu-name">Mezcal Old Fashioned</div><div class="menu-desc">Sciroppo di senape · bitter selvatico</div><div class="allergen"><span class="a-tag" role="img" aria-label="Allergene: senape">⚠ senape</span></div></div>
-      </article>
+
+  <div class="seq-grid">
+
+    <!-- header row -->
+    <div class="seq-drink seq-head" style="grid-row:1;grid-column:1">Drink</div>
+    <div class="seq-food seq-head" style="grid-row:1;grid-column:2">Food</div>
+
+    <!-- 1: Bloom Saker / vuoto -->
+    <div class="seq-drink" style="grid-row:2;grid-column:1">
+      <div class="seq-num">1</div>
+      <div>
+        <div class="menu-name">Bloom Saker</div>
+        <div class="menu-desc">sake nigori - kefir d’acqua con acacia, rosa canina e melissa</div>
+      </div>
     </div>
-  </section>
+    <div style="grid-row:2;grid-column:2"></div>
+
+    <!-- 2: Flour Doble / Tagliere (spans rows 3-4) -->
+    <div class="seq-drink" style="grid-row:3;grid-column:1">
+      <div class="seq-num">2</div>
+      <div>
+        <div class="menu-name">Flour Doble</div>
+        <div class="menu-desc">rum agricol fatwashed cocco e foglie di fico - maraschino - shrub di borragine</div>
+        <div class="allergen"><span class="a-tag" style="white-space:nowrap">⚠ frutta a guscio</span></div>
+      </div>
+    </div>
+    <div class="seq-food" style="grid-row:3/5;grid-column:2;display:flex;flex-direction:column;justify-content:center;align-self:stretch">
+      <div class="food-ingredients"><span class="food-title">Tagliere</span> formaggio piccante stagionato con confettura agave, cocco e fichi - crostino stracchino e salsiccia - crostino olive e pomodori</div>
+      <div class="allergen" style="margin-top:.3rem"><span class="a-tag" style="white-space:nowrap">⚠ frutta a guscio,</span> <span class="a-tag">⚠ soia</span></div>
+    </div>
+
+    <!-- 3: AgresDo / (tagliere continua) -->
+    <div class="seq-drink" style="grid-row:4;grid-column:1">
+      <div class="seq-num">3</div>
+      <div>
+        <div class="menu-name">AgresDo</div>
+        <div class="menu-desc">vino Do - cognac - sciroppo di rosa - agresto</div>
+        <div class="allergen"><span class="a-tag" style="white-space:nowrap">⚠ frutta a guscio,</span> <span class="a-tag">⚠ solfiti</span></div>
+      </div>
+    </div>
+
+    <!-- 4: Old Feral / Tartare -->
+    <div class="seq-drink" style="grid-row:5;grid-column:1">
+      <div class="seq-num">4</div>
+      <div>
+        <div class="menu-name">Old Feral</div>
+        <div class="menu-desc">mezcal - sciroppo di senape - bitter al rovo, equiseto e piantaggine</div>
+        <div class="allergen"><span class="a-tag">⚠ senape</span></div>
+      </div>
+    </div>
+    <div class="seq-food" style="grid-row:5;grid-column:2">
+      <div class="food-ingredients"><span class="food-title">Tartare</span> barbabietola con cicoria saltata alla senape, su valeriana</div>
+      <div class="allergen" style="margin-top:.3rem"><span class="a-tag">⚠ senape</span></div>
+    </div>
+
+  </div>
+
+</div>
+</section>
 
   <section class="section" id="prenota" aria-labelledby="prenota-title">
     <p class="section-label">Prenota</p>
