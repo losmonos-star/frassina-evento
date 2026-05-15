@@ -266,6 +266,13 @@ function toggleMode(cls,btn){var on=document.body.classList.toggle(cls);btn.clas
 function scrollToId(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
 function openPopup(){document.getElementById('booking-popup').classList.add('open');document.getElementById('f-nome').focus();}
 function closePopup(){document.getElementById('booking-popup').classList.remove('open');var m=document.getElementById('popup-msg');m.className='popup-msg';m.textContent='';}
+var REVOLUT_LINKS={
+  '1':'https://checkout.revolut.com/pay/b4de64a7-1c34-4ff1-a75d-fec0a3ff2f45',
+  '2':'https://checkout.revolut.com/pay/fc233191-2016-41c8-9d8f-bcef8f8cb75e',
+  '3':'https://checkout.revolut.com/pay/546c0a28-b0ca-4c0c-90f7-25c0cfb219b4',
+  '4':'https://checkout.revolut.com/pay/df9bd6d8-7abf-4528-b3cb-a58ca474948e',
+  '5':'https://checkout.revolut.com/pay/46394cb2-6234-4f36-b58d-8d055ad256e7'
+};
 loadPrefs();
 document.addEventListener('DOMContentLoaded',function(){
   var popup=document.getElementById('booking-popup');
@@ -281,12 +288,11 @@ document.addEventListener('DOMContentLoaded',function(){
     var btn=form.querySelector('.popup-submit');
     btn.textContent='Reindirizzamento...';
     btn.disabled=true;
-    // Send to Formspree in background
     var fd=new FormData(form);
     fetch('https://formspree.io/f/xlgzykda',{method:'POST',body:fd,headers:{'Accept':'application/json'}}).catch(function(){});
-    // Redirect immediately
+    var link=REVOLUT_LINKS[persone]||REVOLUT_LINKS['1'];
     setTimeout(function(){
-      window.location.href='https://checkout.revolut.com/pay/b4de64a7-1c34-4ff1-a75d-fec0a3ff2f45';
+      window.location.href=link;
     },400);
   });
 });
