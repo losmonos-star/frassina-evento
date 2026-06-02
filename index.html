@@ -145,6 +145,7 @@ footer{text-align:center;padding:2rem 1.5rem 3rem;border-top:1px solid var(--bor
   <button class="ab" id="btn-contrast" onclick="toggleMode('hi-contrast',this)" aria-pressed="false">Alto contrasto</button>
   <button class="ab" id="btn-light" onclick="toggleMode('light-mode',this)" aria-pressed="false">Modalità chiara</button>
   <button class="ab" id="btn-colorblind" onclick="toggleMode('colorblind',this)" aria-pressed="false">Daltonismo</button>
+  <button class="ab" id="btn-lang" onclick="toggleLang(this)" aria-pressed="false">EN</button>
 </div>
 
 <section class="hero" aria-labelledby="hero-title">
@@ -153,16 +154,16 @@ footer{text-align:center;padding:2rem 1.5rem 3rem;border-top:1px solid var(--bor
   <div class="hero-text">
     <p class="collab-line">Los Monos Sociales × Il Paradiso di Frassina</p>
     <h1 class="hero-title" id="hero-title">Evento<br>tra i <span>filari</span>.</h1>
-    <p class="hero-place">Montalcino, Val d’Orcia — 20 Giugno 2026</p>
+    <p class="hero-place" data-it="Montalcino, Val d’Orcia — 20 Giugno 2026" data-en="Montalcino, Val d’Orcia — 20 June 2026">Montalcino, Val d’Orcia — 20 Giugno 2026</p>
     <div class="hero-tags" role="list">
-      <span class="tag" role="listitem" aria-label="icona foglie">🌱 Vegan</span>
-      <span class="tag" role="listitem" aria-label="icona grano">🌾 Gluten free</span>
-      <span class="tag" role="listitem" aria-label="icona fiore rosa">🌸 Accessibile</span>
+      <span class="tag" role="listitem" aria-label="icona foglie" data-it="🌱 Vegan" data-en="🌱 Vegan">🌱 Vegan</span>
+      <span class="tag" role="listitem" aria-label="icona grano" data-it="🌾 Gluten free" data-en="🌾 Gluten free">🌾 Gluten free</span>
+      <span class="tag" role="listitem" aria-label="icona fiore rosa" data-it="🌸 Accessibile" data-en="🌸 Accessible">🌸 Accessibile</span>
     </div>
   </div>
   <div class="hero-cta">
-    <button class="btn btn-secondary" onclick="scrollToId('menu')" aria-label="Vai alla sezione sequenza cocktail">Vedi il menu</button>
-    <button class="btn btn-primary" onclick="scrollToId('prenota')" aria-label="Apri modulo prenotazione" onclick="openPopup();return false">Prenota il tuo posto</button>
+    <button class="btn btn-secondary" onclick="scrollToId('menu')" aria-label="Vai alla sezione sequenza cocktail" data-it="Vedi il menu" data-en="See the menu">Vedi il menu</button>
+    <button class="btn btn-primary" onclick="scrollToId('prenota')" aria-label="Apri modulo prenotazione" onclick="openPopup();return false" data-it="Prenota il tuo posto" data-en="Book your spot">Prenota il tuo posto</button>
   </div>
 </section>
 
@@ -232,7 +233,7 @@ footer{text-align:center;padding:2rem 1.5rem 3rem;border-top:1px solid var(--bor
       </div>
     </div>
     <div class="seq-food" style="grid-row:5;grid-column:2">
-      <div class="food-ingredients"><span class="food-title">Tartare</span> barbabietola con cicoria saltata alla senape, su valeriana</div>
+      <div class="food-ingredients"><span class="food-title">Tartare</span> barbabietola con piantaggine, salsa yogurt alla senape, su valeriana</div>
       <div class="allergen" style="margin-top:.3rem"><span class="a-tag">⚠ senape</span></div>
     </div>
 
@@ -325,6 +326,22 @@ var REVOLUT_LINKS={
   '5':'https://checkout.revolut.com/pay/46394cb2-6234-4f36-b58d-8d055ad256e7'
 };
 loadPrefs();
+var currentLang = 'it';
+function toggleLang(btn) {
+  currentLang = currentLang === 'it' ? 'en' : 'it';
+  btn.textContent = currentLang === 'en' ? 'IT' : 'EN';
+  btn.setAttribute('aria-pressed', currentLang === 'en' ? 'true' : 'false');
+  document.querySelectorAll('[data-it]').forEach(function(el) {
+    var val = el.getAttribute('data-' + currentLang);
+    if (val) {
+      if (el.tagName === 'BUTTON' || el.tagName === 'A') {
+        el.textContent = val;
+      } else {
+        el.textContent = val;
+      }
+    }
+  });
+}
 document.addEventListener('DOMContentLoaded',function(){
   var popup=document.getElementById('booking-popup');
   var form=document.getElementById('booking-form');
